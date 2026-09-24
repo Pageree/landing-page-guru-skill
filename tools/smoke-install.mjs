@@ -3,6 +3,7 @@ import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
+import assert from 'node:assert/strict';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const cli = process.env.GURU_SKILLS_CLI;
@@ -27,7 +28,11 @@ try {
     if (!installs.length) throw new Error(`No installed skill found for ${agent}`);
     for (const install of installs) {
       for (const resource of ['SKILL.md', 'LICENSE.txt', 'references/forms-and-delivery.md', 'assets/integration-contract.schema.json', 'scripts/lib/common.mjs', 'scripts/test-form-flow.mjs', 'scripts/validate-events.mjs']) await readFile(resolve(install, resource));
-      execFileSync(process.execPath, [resolve(install, 'scripts/validate-events.mjs'), '--contract', resolve(root, 'examples/local-service/integration-contract.json'), '--trace', resolve(root, 'evals/fixtures/events-valid.json')], { cwd: target, stdio: 'pipe' });
+      const output = execFileSync(process.execPath, [resolve(install, 'scripts/validate-events.mjs'), '--contract', resolve(root, 'examples/local-service/integration-contract.json'), '--trace', resolve(root, 'evals/fixtures/events-valid.json')], { cwd: target, encoding: 'utf8', stdio: 'pipe' });
+      const report = JSON.parse(output);
+      assert.equal(report.tool, 'validate-events');
+      assert.equal(report.summary.fail, 0);
+      assert.ok(report.summary.pass > 0);
     }
     results.push({ agent, status: 'pass', installs: installs.map(path => path.slice(target.length + 1)), checks: 'Selective copy, runtime resources, installed event helper execution' });
   }

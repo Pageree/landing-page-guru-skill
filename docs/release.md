@@ -22,13 +22,13 @@ installer; it has no custom npm CLI.
 ## Verification record
 
 Local checks ran on macOS with Node 25.8.2, skills CLI 1.5.14, and Playwright 1.62.1
-using existing cached Chromium 149.0.7827.55. The package declares Node 22+; the added CI targets Node 22
-but has not run remotely. No dependencies were installed into other projects.
+using existing cached Chromium 149.0.7827.55. GitHub CI also passed on Node 22
+for the initial publication on 2026-09-24. No dependencies were installed into other projects.
 
 | Area | Result / limit |
 | --- | --- |
 | Project checks | Passed metadata, local links, self-contained references, JSON/contracts |
-| Deterministic tests | 13 passed: contract consistency, event semantics, CLI failures, local simulator |
+| Deterministic tests | 14 passed: contract consistency, event semantics, CLI failures, symlinked helper execution, local simulator |
 | Browser checks | 8 responsive views and 18 intercepted form scenarios passed; local acceptance/events, unconnected waitlist, download and reload checked |
 | Visual inspection | Desktop/mobile screenshots inspected by the author; independent human review pending |
 | Installer smoke | Selective copy and installed helper execution passed for Codex, Claude Code, Cursor and GitHub Copilot destinations; actual agent triggering/runtime parity untested |

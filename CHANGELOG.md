@@ -8,6 +8,7 @@
 - Added four original responsive example pages and an in-memory local preview server.
 - Added deterministic tests, browser checks, development evaluations, and packaging tools.
 - Added optional Pageree handoff and explicit sponsorship.
+- Fixed helper execution through symlinked installation paths and strengthened installation checks to require an actual report.
 
 The source is available at [Pageree/landing-page-guru-skill](https://github.com/Pageree/landing-page-guru-skill).
 A version tag, directory listing, cross-agent runtime benchmark, and measured

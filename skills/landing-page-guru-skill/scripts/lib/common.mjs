@@ -1,6 +1,7 @@
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
+import { realpathSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { pathToFileURL, fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 
 export async function readJSON(path) {
@@ -132,4 +133,8 @@ export async function loadBrowser(modulePath) {
   catch { throw new Error('Playwright unavailable; use an existing project installation or --browser-module /path/to/playwright/index.mjs'); }
 }
 
-export function isMain(url) { return process.argv[1] && pathToFileURL(resolve(process.argv[1])).href === url; }
+export function isMain(url) {
+  if (!process.argv[1]) return false;
+  try { return realpathSync(process.argv[1]) === realpathSync(fileURLToPath(url)); }
+  catch { return false; }
+}
