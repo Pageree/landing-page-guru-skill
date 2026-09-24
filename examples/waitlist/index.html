@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fieldwork — A quieter place for your next idea</title>
+  <meta name="description" content="A fictional product waitlist for Fieldwork, a workspace for independent researchers.">
+  <meta name="robots" content="noindex, nofollow"><link rel="stylesheet" href="../shared/base.css">
+  <style>
+    :root { --paper:#f4f3e9; --ink:#203d31; --muted:#526459; --accent:#254f3a; --panel:#e0e7d7; --line:#ccd1bd; --radius:3px; }
+    .hero { padding-block:78px 86px; display:grid; grid-template-columns:1.1fr 1fr; gap:70px; align-items:center; }
+    .hero h1 { font-family:Georgia,serif; font-weight:400; font-size:clamp(3.2rem,6.6vw,6.3rem); }
+    .hero h1 em { color:#727d49; }
+    .product { background:var(--panel); padding:38px 24px 24px; position:relative; min-height:450px; }
+    .product::before { content:"FIELD NOTES / 001"; font:10px ui-monospace,monospace; position:absolute; top:14px; left:24px; letter-spacing:.1em; }
+    .paper { background:#fffef7; padding:24px; box-shadow:0 12px 28px #213c3112; transform:rotate(-3deg); border:1px solid #d7dbcd; }
+    .paper .tiny { font:11px ui-monospace,monospace; color:#65725f; }
+    .paper h2 { font:1.7rem/1.2 Georgia,serif; margin:18px 0; }
+    .note-row { display:flex; gap:14px; border-top:1px solid #dde1d3; padding:16px 0; font-size:.82rem; align-items:center; }
+    .note-icon { width:32px; height:32px; display:grid; place-items:center; background:#edf0e2; flex-shrink:0; }
+    .sticky { position:relative; margin:-14px -2px 0 auto; max-width:210px; padding:18px; background:#eee4a5; transform:rotate(5deg); font:1rem/1.5 Georgia,serif; box-shadow:0 5px 12px #00000009; }
+    figcaption { margin-top:26px; font:10px ui-monospace,monospace; letter-spacing:.06em; color:#526459; }
+    .principle { font:clamp(1.8rem,3vw,3rem)/1.3 Georgia,serif; max-width:28ch; }
+    .join { background:#e6ebdb; }
+    @media(max-width:760px) { .hero { grid-template-columns:1fr; gap:44px; padding-block:46px 56px; } .product { min-height:390px; } }
+  </style>
+</head>
+<body data-page="waitlist">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="demo-note">Fictional concept · This waitlist is not connected</div>
+  <header class="nav wrap"><a class="brand" href="#">fieldwork<span aria-hidden="true"> ✳</span></a><nav class="nav-links" aria-label="Main"><a class="optional" href="#idea">The idea</a><a href="#join">Join the waitlist ↗</a></nav></header>
+  <main id="main">
+    <section class="hero wrap">
+      <div><span class="eyebrow">For the independently curious</span><h1>Your ideas.<br>A little more<br><em>room to grow.</em></h1><p class="lede">Fieldwork is a workspace concept for collecting research, connecting the dots, and turning scattered notes into something worth sharing.</p><a class="button" href="#join">Explore the waitlist <span aria-hidden="true">↗</span></a><p class="form-note">Early concept. No launch date has been announced.</p></div>
+      <figure class="product" aria-label="Illustrated concept of a research workspace"><div class="paper"><span class="tiny">PERSONAL WORKSPACE / RESEARCH</span><h2>What makes a<br>neighborhood feel alive?</h2><div class="note-row"><span class="note-icon" aria-hidden="true">↗</span><div>A walk, a conversation, a pattern.<br><small>Notes from the street</small></div></div><div class="note-row"><span class="note-icon" aria-hidden="true">◎</span><div>Places people choose to linger.<br><small>Connections to explore</small></div></div><div class="note-row"><span class="note-icon" aria-hidden="true">≡</span><div>A first outline takes shape.<br><small>From collection to composition</small></div></div></div><div class="sticky">Keep the interesting bits.<br>Find the thread later.</div><figcaption>CONCEPT ILLUSTRATION · NOT A LIVE PRODUCT</figcaption></figure>
+    </section>
+    <section id="idea" class="section wrap"><span class="eyebrow">A place for the unfinished</span><div class="split"><h2 class="principle">Good work starts with something you can't quite explain yet.</h2><p>Bookmarks in one place. Notes in another. A thought you meant to come back to. Fieldwork explores a simpler way to keep the context around your ideas, from the first observation to the first draft.</p></div></section>
+    <section class="section wrap" aria-label="Concept principles"><div class="columns"><article><span class="number">01 / COLLECT</span><h3>Bring the context along.</h3><p>Keep a note beside the source that sparked it, so the idea still makes sense when you return.</p></article><article><span class="number">02 / CONNECT</span><h3>Follow an unexpected thread.</h3><p>Group related observations without needing to know the final structure in advance.</p></article><article><span class="number">03 / MAKE</span><h3>Give your thinking a shape.</h3><p>Move from a collection of fragments to a clear outline you can keep developing.</p></article></div></section>
+    <section id="join" class="section join"><div class="wrap split"><div><span class="eyebrow">Keep a place for curiosity</span><h2>Interested in<br>what comes next?</h2><p class="lede">This example shows an early-stage waitlist before a submission destination exists. It does not collect registrations.</p></div><div class="form-card"><h3>Waitlist preview</h3><form id="lead-form" data-demo-form data-mode="unconnected" action="#join" method="post"><div class="field"><label for="email">Email address (required)</label><input id="email" name="email" type="email" autocomplete="email" required aria-describedby="waitlist-note"></div><button class="button" type="submit" disabled>Preview signup</button><p id="waitlist-note" class="form-note">Unconnected demo. Your email will not be sent or saved.</p><p id="form-status" class="status" role="status" aria-live="polite"></p><noscript><p>This preview needs JavaScript; signup remains unavailable.</p></noscript></form></div></div></section>
+  </main>
+  <footer class="footer wrap"><span>Fieldwork · A fictional product concept</span><a href="../">Browse the examples ↗</a></footer>
+  <script src="../shared/forms.js" type="module"></script>
+</body></html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Relay — Make the handoff clear</title><meta name="description" content="A fictional B2B demo page for an operations handoff product."><meta name="robots" content="noindex, nofollow"><link rel="stylesheet" href="../shared/base.css">
+  <style>
+    :root { --paper:#f7f8fa; --ink:#17233a; --muted:#546176; --accent:#2445ae; --line:#d4dbe6; --panel:#e8edf7; --radius:8px; }
+    .brand { letter-spacing:-.04em; }
+    .brand-mark { display:inline-block; width:20px; height:22px; background:#2445ae; clip-path:polygon(0 0,100% 0,65% 50%,100% 100%,0 100%,35% 50%); vertical-align:middle; margin-right:8px; }
+    .hero { text-align:center; padding:74px 0 55px; }
+    .hero h1 { max-width:15ch; margin:auto; font-weight:650; font-size:clamp(3rem,6.8vw,6rem); }
+    .hero .lede { margin:26px auto; max-width:53ch; }
+    .hero .eyebrow { color:#2445ae; }
+    .app { background:white; border:1px solid #cbd3e3; border-radius:12px; margin:0 auto 75px; box-shadow:0 18px 50px #253e6b0b; overflow:hidden; }
+    .app-head { padding:18px 25px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; font-size:.8rem; gap:18px; }
+    .app-body { display:grid; grid-template-columns:180px 1fr; min-height:330px; }
+    .sidebar { padding:25px 20px; background:#f5f7fc; font-size:.78rem; color:#69758a; }
+    .sidebar span { display:block; padding:10px 8px; margin-bottom:5px; }
+    .sidebar .selected { color:#2546aa; background:#e7ecfc; border-radius:5px; }
+    .board { padding:25px; }
+    .board-title { display:flex; align-items:center; justify-content:space-between; gap:15px; margin-bottom:25px; }
+    .board h2 { font-size:1.4rem; font-weight:650; }
+    .tag { font-size:.66rem; padding:4px 8px; color:#294b95; background:#edf1fb; border-radius:4px; white-space:nowrap; }
+    .task { display:grid; grid-template-columns:2fr 1fr 1fr; gap:15px; align-items:center; padding:16px 0; border-top:1px solid #e8ecf3; font-size:.8rem; }
+    .task small { color:#617086; }
+    .good { background:#edf5ed; color:#35643d; }
+    .product-caption { text-align:center; font-size:.7rem; padding:12px; color:#69758a; border-top:1px solid var(--line); }
+    .dark { background:#17233a; color:#fff; }
+    .dark .eyebrow { color:#aebdda; }
+    .dark p { color:#c2cbdc; }
+    .dark .number { color:#b7c4dc; }
+    @media(max-width:760px){ .hero { padding-top:45px; } .app-body { grid-template-columns:1fr; } .sidebar { display:none; } .board { padding:20px 15px; } .task { grid-template-columns:1.4fr 1fr; } .task .owner { display:none; } .app-head { padding:15px; } }
+  </style>
+</head><body data-page="b2b-demo"><a class="skip" href="#main">Skip to content</a><div class="demo-note">Fictional product · Illustrated interface · Demo requests are not delivered</div>
+  <header class="nav wrap"><a class="brand" href="#"><span class="brand-mark" aria-hidden="true"></span>relay</a><nav class="nav-links" aria-label="Main"><a class="optional" href="#workflow">How it works</a><a href="#demo">Request a demo ↗</a></nav></header>
+  <main id="main"><section class="hero wrap"><span class="eyebrow">The next step shouldn't be a guessing game</span><h1>Good work deserves<br>a clear handoff.</h1><p class="lede">Relay is a product concept for operations teams coordinating work across departments. Put the owner, the context, and the next action in one shared view.</p><a class="button" href="#demo">Explore a demo request <span aria-hidden="true">→</span></a></section>
+    <figure class="app wrap"><div class="app-head"><strong>Relay / Operations</strong><span>Illustrative workspace</span></div><div class="app-body"><div class="sidebar" aria-hidden="true"><span>Overview</span><span class="selected">Customer launch</span><span>Team handoffs</span><span>Reference notes</span></div><div class="board"><div class="board-title"><h2>Customer launch</h2><span class="tag">EXAMPLE WORKFLOW</span></div><div class="task"><strong>Confirm the agreed scope</strong><span class="owner">Account team</span><span class="tag good">Ready to hand off</span></div><div class="task"><strong>Prepare the workspace</strong><span class="owner">Operations</span><span class="tag">In progress</span></div><div class="task"><strong>Schedule the walkthrough</strong><span class="owner">Customer team</span><small>Waiting for setup</small></div><div class="task"><strong>Record the next decision</strong><span class="owner">Project owner</span><small>Context attached</small></div></div></div><figcaption class="product-caption">Original concept illustration. This is not a live product or customer result.</figcaption></figure>
+    <section id="workflow" class="section dark"><div class="wrap"><span class="eyebrow">Make the next move visible</span><div class="columns"><article><span class="number">01</span><h3>One accountable owner.</h3><p>Show who has the next action so responsibility doesn't disappear between teams.</p></article><article><span class="number">02</span><h3>The context travels too.</h3><p>Keep decisions and reference material with the handoff instead of in a separate conversation.</p></article><article><span class="number">03</span><h3>Know what is waiting.</h3><p>Distinguish work in progress from work waiting on a decision or another team.</p></article></div></div></section>
+    <section id="demo" class="section wrap split"><div><span class="eyebrow">A conversation about your workflow</span><h2>Bring a handoff.<br>Explore a better way.</h2><p class="lede">A useful demo starts with one process your team actually runs. The example request asks for the context needed to make that conversation relevant.</p><ul class="checklist"><li>Walk through a cross-team process.</li><li>Identify where ownership or context gets lost.</li><li>Discuss fit before any implementation commitment.</li></ul><p class="form-note">Concept demonstration. No meeting, availability, or product access is promised.</p></div><div class="form-card"><h3>Request a demo</h3><form id="lead-form" data-demo-form data-mode="test" data-success="Request accepted by the demo. No meeting was booked and no email was sent." action="/demo/submit" method="post"><div class="field"><label for="email">Work email (required)</label><input id="email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="team">Team size (required)</label><select id="team" name="team" required><option value="">Choose a range</option><option>2–10</option><option>11–50</option><option>51–200</option><option>201+</option></select></div><div class="field"><label for="workflow-field">Workflow to discuss (required)</label><select id="workflow-field" name="workflow" required><option value="">Choose a workflow</option><option>Customer onboarding</option><option>Project delivery</option><option>Internal approvals</option><option>Another workflow</option></select></div><button class="button" type="submit" disabled>Send demo request <span aria-hidden="true">→</span></button><p class="form-note">Use synthetic data. Requests stay in the local demo. <a href="#privacy">Demo data details</a>.</p><p id="form-status" class="status" role="status" aria-live="polite"></p><noscript><p>JavaScript is needed for this demo request.</p></noscript></form></div></section>
+    <section id="privacy" class="privacy wrap"><h2>Demo data</h2><p>Submitted fields are read and discarded by the local preview server. Only a temporary opaque retry identifier is kept in memory. No leads, emails, or analytics are sent to another service. Use fictional details.</p></section>
+  </main><footer class="footer wrap"><span>Relay · Fictional B2B product</span><a href="../">Browse the examples ↗</a></footer><script src="../shared/forms.js" type="module"></script>
+</body></html>

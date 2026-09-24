@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "pageId": "local-service",
+  "environment": "demo",
+  "source": "synthetic",
+  "actions": [
+    {
+      "id": "a1",
+      "kind": "page-view",
+      "outcome": "none",
+      "permission": "not-required",
+      "conversionId": null
+    },
+    {
+      "id": "a2",
+      "kind": "form-submit",
+      "outcome": "rejected",
+      "permission": "not-required",
+      "conversionId": null
+    },
+    {
+      "id": "a3",
+      "kind": "form-submit",
+      "outcome": "timeout",
+      "permission": "not-required",
+      "conversionId": null
+    },
+    {
+      "id": "a4",
+      "kind": "form-submit",
+      "outcome": "accepted",
+      "permission": "not-required",
+      "conversionId": "lead-1"
+    },
+    {
+      "id": "a5",
+      "kind": "form-submit",
+      "outcome": "duplicate",
+      "permission": "not-required",
+      "conversionId": "lead-1"
+    },
+    {
+      "id": "a6",
+      "kind": "page-view",
+      "outcome": "none",
+      "permission": "not-required",
+      "conversionId": null
+    }
+  ],
+  "events": [
+    {
+      "name": "lead_accepted",
+      "actionId": "a4",
+      "eventId": "evt-1",
+      "conversionId": "lead-1",
+      "permission": "not-required",
+      "properties": {
+        "page_id": "local-service",
+        "form_id": "lead-form"
+      }
+    },
+    {
+      "name": "lead_accepted",
+      "actionId": "a2",
+      "eventId": "evt-2",
+      "conversionId": "lead-1",
+      "permission": "not-required",
+      "properties": {
+        "email": "fiction@example.test"
+      }
+    }
+  ]
+}

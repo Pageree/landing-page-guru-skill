@@ -1,0 +1,22 @@
+import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+execFileSync(process.execPath, [resolve(root, 'tools/check-project.mjs')], { stdio: 'inherit' });
+const name = 'landing-page-guru-skill';
+const dist = resolve(root, 'dist');
+const stage = resolve(dist, 'staging');
+await mkdir(dist, { recursive: true });
+await rm(stage, { recursive: true, force: true });
+await mkdir(stage);
+await cp(resolve(root, 'skills', name), resolve(stage, name), { recursive: true });
+const archive = resolve(dist, `${name}.skill`);
+await rm(archive, { force: true });
+execFileSync('zip', ['-q', '-r', archive, name], { cwd: stage });
+const bytes = await readFile(archive);
+await writeFile(resolve(dist, 'SHA256SUMS'), `${createHash('sha256').update(bytes).digest('hex')}  ${name}.skill\n`);
+await rm(stage, { recursive: true });
+console.log(`Packaged ${name}.skill (${bytes.length} bytes) with SHA256SUMS. ZIP packaging does not establish compatibility with every agent.`);

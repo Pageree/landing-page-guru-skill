@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "1.0",
+  "pageId": "waitlist",
+  "environment": "demo",
+  "goal": {
+    "businessOutcome": "Interest in a future product",
+    "conversion": "lead_accepted",
+    "denominator": "eligible visits",
+    "window": null
+  },
+  "form": {
+    "mode": "unconnected",
+    "fields": [
+      {
+        "name": "email",
+        "type": "email",
+        "required": true,
+        "purpose": "Respond to the requested inquiry",
+        "sensitivity": "personal",
+        "validation": "Email syntax; revalidate server-side"
+      }
+    ],
+    "destination": {
+      "endpoint": null,
+      "method": "POST",
+      "permittedOrigin": "http://127.0.0.1:4173",
+      "secretEnvNames": []
+    },
+    "responses": {
+      "accepted": {
+        "status": 200,
+        "body": {
+          "accepted": true,
+          "demo": true
+        },
+        "meaning": "Simulated acceptance; no storage or delivery"
+      },
+      "duplicate": {
+        "status": 409,
+        "body": {
+          "accepted": false,
+          "duplicate": true
+        },
+        "meaning": "No new acceptance"
+      },
+      "rejected": {
+        "status": 422,
+        "body": {
+          "accepted": false
+        },
+        "meaning": "Preserve values; not accepted"
+      },
+      "timeout": "Unknown outcome; keep input and retry identity",
+      "retrySafe": false,
+      "idempotencyHeader": null
+    },
+    "success": {
+      "mode": "in-place",
+      "redirectPath": null,
+      "message": "Not connected; nothing sent",
+      "nextStep": "No real fulfillment; demonstration only"
+    }
+  },
+  "delivery": {
+    "destinationRef": null,
+    "owner": "Demo maintainer",
+    "resourcePath": null,
+    "observable": {
+      "acceptance": false,
+      "storage": false,
+      "notification": false,
+      "receipt": false
+    }
+  },
+  "events": [
+    {
+      "name": "lead_accepted",
+      "trigger": "form-accepted",
+      "successPredicate": "accepted",
+      "deduplication": "conversion",
+      "properties": [
+        "page_id",
+        "form_id"
+      ],
+      "permission": "analytics",
+      "testSink": "window.__landingEvents"
+    }
+  ],
+  "privacy": {
+    "audienceRegions": [],
+    "noticeRef": null,
+    "purposes": [
+      "Synthetic demonstration only"
+    ],
+    "retentionDecision": "Fields discarded; retry ID expires from local memory after ten minutes",
+    "analyticsRequiresPermission": false,
+    "permissionStates": [
+      "not-required"
+    ],
+    "unresolved": [
+      "Production audience, processing, retention and permissions require a real configuration"
+    ]
+  },
+  "capabilities": {
+    "backendAcceptance": false,
+    "deliveryObservation": false,
+    "redirects": false,
+    "exports": true,
+    "experimentAssignment": false
+  },
+  "verification": {
+    "target": "http://127.0.0.1:4173/waitlist/",
+    "browser": null,
+    "externalChecks": [
+      "Production acceptance",
+      "Lead storage",
+      "Notification and receipt"
+    ]
+  }
+}

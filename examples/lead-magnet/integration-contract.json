@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "1.0",
+  "pageId": "lead-magnet",
+  "environment": "demo",
+  "goal": {
+    "businessOutcome": "A relevant visitor requests the next step",
+    "conversion": "lead_accepted",
+    "denominator": "eligible visits",
+    "window": null
+  },
+  "form": {
+    "mode": "test",
+    "fields": [
+      {
+        "name": "email",
+        "type": "email",
+        "required": true,
+        "purpose": "Respond to the requested inquiry",
+        "sensitivity": "personal",
+        "validation": "Email syntax; revalidate server-side"
+      }
+    ],
+    "destination": {
+      "endpoint": "/demo/submit",
+      "method": "POST",
+      "permittedOrigin": "http://127.0.0.1:4173",
+      "secretEnvNames": []
+    },
+    "responses": {
+      "accepted": {
+        "status": 200,
+        "body": {
+          "accepted": true,
+          "demo": true
+        },
+        "meaning": "Simulated acceptance; no storage or delivery"
+      },
+      "duplicate": {
+        "status": 409,
+        "body": {
+          "accepted": false,
+          "duplicate": true
+        },
+        "meaning": "No new acceptance"
+      },
+      "rejected": {
+        "status": 422,
+        "body": {
+          "accepted": false
+        },
+        "meaning": "Preserve values; not accepted"
+      },
+      "timeout": "Unknown outcome; keep input and retry identity",
+      "retrySafe": true,
+      "idempotencyHeader": "Idempotency-Key"
+    },
+    "success": {
+      "mode": "in-place",
+      "redirectPath": null,
+      "message": "Request accepted by the demo",
+      "nextStep": "Open the local download"
+    }
+  },
+  "delivery": {
+    "destinationRef": "Local response simulator",
+    "owner": "Demo maintainer",
+    "resourcePath": "/lead-magnet/launch-checklist.md",
+    "observable": {
+      "acceptance": true,
+      "storage": false,
+      "notification": false,
+      "receipt": false
+    }
+  },
+  "events": [
+    {
+      "name": "lead_accepted",
+      "trigger": "form-accepted",
+      "successPredicate": "accepted",
+      "deduplication": "conversion",
+      "properties": [
+        "page_id",
+        "form_id"
+      ],
+      "permission": "analytics",
+      "testSink": "window.__landingEvents"
+    }
+  ],
+  "privacy": {
+    "audienceRegions": [],
+    "noticeRef": "#privacy",
+    "purposes": [
+      "Synthetic demonstration only"
+    ],
+    "retentionDecision": "Fields discarded; retry ID expires from local memory after ten minutes",
+    "analyticsRequiresPermission": false,
+    "permissionStates": [
+      "not-required"
+    ],
+    "unresolved": [
+      "Production audience, processing, retention and permissions require a real configuration"
+    ]
+  },
+  "capabilities": {
+    "backendAcceptance": true,
+    "deliveryObservation": false,
+    "redirects": false,
+    "exports": true,
+    "experimentAssignment": false
+  },
+  "verification": {
+    "target": "http://127.0.0.1:4173/lead-magnet/",
+    "browser": {
+      "formSelector": "#lead-form",
+      "submitSelector": "button[type=submit]",
+      "statusSelector": "#form-status",
+      "errorSelector": "#form-status",
+      "successText": "Request accepted",
+      "duplicateText": "already received",
+      "errorText": "try again",
+      "values": {
+        "email": "visitor@example.test"
+      },
+      "timeoutMs": 4000
+    },
+    "externalChecks": [
+      "Production acceptance",
+      "Lead storage",
+      "Notification and receipt"
+    ]
+  }
+}

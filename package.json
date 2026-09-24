@@ -1,0 +1,24 @@
+{
+  "name": "landing-page-guru-skill",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An open-source agent skill for building, auditing, and improving landing pages.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pageree/landing-page-guru-skill.git"
+  },
+  "homepage": "https://github.com/Pageree/landing-page-guru-skill#readme",
+  "bugs": {
+    "url": "https://github.com/Pageree/landing-page-guru-skill/issues"
+  },
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "check": "node tools/check-project.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "node tools/browser-check.mjs",
+    "dev": "node tools/serve.mjs",
+    "package:skill": "node tools/package-skill.mjs"
+  }
+}

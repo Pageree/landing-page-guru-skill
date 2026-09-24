@@ -1,0 +1,26 @@
+{
+  "skill_name": "landing-page-guru-skill",
+  "evals": [
+    {
+      "id": 1,
+      "name": "unconnected-waitlist",
+      "prompt": "Create a complete single-file HTML landing page for Seednote, a new concept helping independent consultants organize research notes. We have no customers, pricing, launch date, or signup endpoint. Use a quiet editorial visual direction, system fonts, and no external assets. Include a waitlist UI and explain its actual status. Save index.html and a short delivery.md. Do not publish or contact any service.",
+      "expected_output": "Responsive page with honest unconnected signup, no invented proof, and accurate verification limits.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "local-service-form",
+      "prompt": "Implement a single-file HTML inquiry page for fictional Alder Garden Care in Oakfield. Seasonal tidy-ups only; no prices, guarantees, testimonials, or response times supplied. Use POST /demo/submit; acceptance is HTTP 200 with {accepted:true}; 422 rejects; 409 with {duplicate:true} means already received. Retrying after network failure must reuse Idempotency-Key. The endpoint accepts but does not deliver notifications. Collect email and service area. Save index.html and delivery.md. Do not contact any live destination.",
+      "expected_output": "Working accessible form with explicit acceptance semantics, preserved input, retry identity, and truthful delivery status.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "broken-success-event",
+      "prompt": "Audit this supplied behavior and provide a corrected standalone JavaScript snippet and report: async function submit(form) { const response = await fetch('/lead', {method:'POST', body:new FormData(form)}); track('lead_accepted', {email:form.email.value}); location.href='/thanks'; } On /thanks, track('lead_accepted') runs on every load. The endpoint returns 200 with {accepted:false} for validation errors and {accepted:true,id:'opaque-id'} for accepted leads. It may accept before a client timeout. Analytics requires opt-in; users can withdraw it. There are 120 visits and 3 recorded leads this week. No backend or browser is available. Save fix.js and report.md. Do not invent test results or claim conversion lift.",
+      "expected_output": "Specific diagnosis, acceptance predicate, deduplication, no personal event properties, permission behavior, honest test limits and low-traffic advice.",
+      "files": []
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "1": [
+    "The page states that the waitlist is unconnected or unavailable before a visitor expects collection.",
+    "The form cannot report a real successful signup or transmit submitted data.",
+    "The page invents no customers, testimonial proof, pricing, or launch date.",
+    "The report explicitly distinguishes static implementation from unavailable browser/runtime checks."
+  ],
+  "2": [
+    "Success requires both a successful HTTP response and accepted:true.",
+    "A rejected or failed request preserves input and offers a recoverable state.",
+    "A retry after a network failure preserves the logical request identity.",
+    "The page makes no email-delivery or booking claim from acceptance alone.",
+    "A duplicate response does not produce an additional lead or acceptance event."
+  ],
+  "3": [
+    "The diagnosis identifies application-level rejection and repeat thank-you views as false lead sources.",
+    "Corrected events require confirmed acceptance, permitted tracking, and non-personal deduplication.",
+    "The corrected code excludes email/form values from analytics properties.",
+    "The report does not claim browser execution or conversion lift from 120 visits and three unvalidated leads."
+  ]
+}
