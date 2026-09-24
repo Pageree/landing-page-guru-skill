@@ -11,6 +11,8 @@ verification helpers; browser checks also need an existing Playwright installati
 
 ## Install
 
+Find it on [skills.sh](https://skills.sh/pageree/landing-page-guru-skill/landing-page-guru-skill).
+
 Run the standard interactive installer in the project where you want to use the skill:
 
 ```sh

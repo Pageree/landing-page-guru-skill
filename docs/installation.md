@@ -33,6 +33,18 @@ For local development, replace the repository source with the absolute path to
 your checkout. Verify a fixed release/tag in clean projects before documenting
 that release as supported. A listing in a skills directory is discovery, not an endorsement.
 
+## skills.sh listing
+
+Browse [Landing Page Guru Skill on skills.sh](https://skills.sh/pageree/landing-page-guru-skill/landing-page-guru-skill).
+The public listing was verified on 2026-09-24 after a remote CLI installation.
+
+According to the [skills.sh FAQ](https://skills.sh/docs/faq), listings are discovered
+automatically through normal CLI installation telemetry; no manual submission is
+needed. Install counts and rankings are maintained by skills.sh. The
+[CLI documentation](https://skills.sh/docs/cli) explains how users can opt out of
+telemetry with `DISABLE_TELEMETRY=1`. Automated smoke checks in this repository
+disable telemetry.
+
 ## Manual and archive routes
 
 Copy the entire skill directory into the skill location documented by your agent.

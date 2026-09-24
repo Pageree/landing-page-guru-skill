@@ -32,6 +32,7 @@ for the initial publication on 2026-09-24. No dependencies were installed into o
 | Browser checks | 8 responsive views and 18 intercepted form scenarios passed; local acceptance/events, unconnected waitlist, download and reload checked |
 | Visual inspection | Desktop/mobile screenshots inspected by the author; independent human review pending |
 | Installer smoke | Selective copy and installed helper execution passed for Codex, Claude Code, Cursor and GitHub Copilot destinations; actual agent triggering/runtime parity untested |
+| skills.sh discovery | Remote CLI installation completed with default telemetry on 2026-09-24; public [skill listing](https://skills.sh/pageree/landing-page-guru-skill/landing-page-guru-skill) and repository page verified |
 | Development evaluation | 3 paired cases; both conditions passed 13/13 assertions; no demonstrated incremental advantage |
 | Comparative release benchmark | 36-run protocol defined; not yet executed |
 | Live integration | No real backend, email, or Pageree publishing performed |
