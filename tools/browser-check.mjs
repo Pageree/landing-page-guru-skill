@@ -92,11 +92,19 @@ try {
   assert.deepEqual(fixtures.seen, { posts: 0, sockets: 0 }, 'Nothing reached a live endpoint');
   const copied = await flowOn('/form-copy/');
   assert.ok(copied.summary.fail > 0, 'Form values sent to an undeclared URL fail the flow');
+  const encoded = await flowOn('/form-copy-encoded/');
+  assert.ok(encoded.summary.fail > 0, 'URL-encoded form values sent to an undeclared URL fail the flow');
   const native = await flowOn('/native/');
   assert.equal(native.summary.fail, 0, 'A navigating form is out of scope, not broken');
   assert.equal(native.checks.find(check => check.id === 'accepted').status, 'not-tested');
+  const unvalidated = await flowOn('/no-validation/');
+  assert.equal(unvalidated.checks.find(check => check.id === 'invalid').status, 'fail', 'A form that posts empty fields is broken, not out of scope');
+  const iframe = await flowOn('/iframe-post/');
+  assert.equal(iframe.checks.find(check => check.id === 'accepted').status, 'fail', 'An iframe post keeps the page, so a missing status is a failure');
+  const newTab = await flowOn('/new-tab/');
+  assert.equal(newTab.checks.find(check => check.id === 'accepted').status, 'not-tested');
   const cdn = await flowOn('/cdn-script/');
   assert.match(cdn.checks.find(check => check.id === 'accepted').observation, /[1-9]\d* cross-origin reads blocked/);
   await writeFile(resolve(output, 'summary.json'), JSON.stringify({ date: new Date().toISOString(), browser: browser.version(), results, limitations: ['No live backend or email delivery tested', 'Structural checks are not a full accessibility audit', 'Browser event traces cover acceptance and reload; broader semantics use separate fixtures'] }, null, 2));
-  console.log(`Browser checks passed: ${results.length} responsive views, 18 intercepted form scenarios, 3 local acceptances/events, unconnected waitlist, download and reload checks, 7 helper fixtures.`);
+  console.log(`Browser checks passed: ${results.length} responsive views, 18 intercepted form scenarios, 3 local acceptances/events, unconnected waitlist, download and reload checks, 11 helper fixtures.`);
 } finally { await browser.close(); await preview.close(); await fixtures.close(); }

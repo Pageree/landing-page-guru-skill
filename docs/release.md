@@ -1,6 +1,6 @@
 # Release checklist and verification record
 
-Version: 0.1.1 source preview. Updated: 2026-11-05.
+Version: 0.1.2 source preview. Updated: 2026-11-05.
 
 ## Before publication
 
@@ -25,7 +25,7 @@ Local checks ran on macOS with Node 25.8.2, skills CLI 1.5.14, and Playwright 1.
 using existing cached Chromium 149.0.7827.55. GitHub CI also passed on Node 22
 for the initial publication on 2026-09-24. No dependencies were installed into other projects.
 
-For 0.1.1 on 2026-11-05, project checks, deterministic tests and browser checks reran on
+For 0.1.2 on 2026-11-05, project checks, deterministic tests and browser checks reran on
 macOS with Node 25.8.2, Playwright 1.62.1 and Chrome 157.0.8103.38. The other rows
 are from 0.1.0.
 
@@ -33,7 +33,7 @@ are from 0.1.0.
 | --- | --- |
 | Project checks | Passed metadata, local links, self-contained references, JSON/contracts |
 | Deterministic tests | 20 passed: contract consistency, event semantics, CLI failures, symlinked helper execution, form helper setup and cleanup, local simulator |
-| Browser checks | 8 responsive views and 18 intercepted form scenarios passed; local acceptance/events, unconnected waitlist, download and reload checked; 7 helper fixtures for cross-origin, analytics, WebSocket, undeclared copy, native and CDN forms passed |
+| Browser checks | 8 responsive views and 18 intercepted form scenarios passed; local acceptance/events, unconnected waitlist, download and reload checked; 11 helper fixtures for cross-origin, analytics, WebSocket, undeclared copies, native, unvalidated, iframe, new-tab and CDN forms passed |
 | Visual inspection | Desktop/mobile screenshots inspected by the author; independent human review pending |
 | Installer smoke | Selective copy and installed helper execution passed for Codex, Claude Code, Cursor and GitHub Copilot destinations; actual agent triggering/runtime parity untested |
 | skills.sh discovery | Remote CLI installation completed with default telemetry on 2026-09-24; public [skill listing](https://skills.sh/pageree/landing-page-guru-skill/landing-page-guru-skill) and repository page verified |

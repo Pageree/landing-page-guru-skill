@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.2 — 2026-11-05 — second round of helper fixes
+
+- `test-form-flow` fails a form that posts on an empty submit again; 0.1.1 had reported it as `not-tested`.
+- `test-form-flow` treats only top-level navigations as native submissions, so a post into a hidden iframe no longer hides a failure.
+- `test-form-flow` recognizes form values in URL-encoded bodies where spaces become `+`.
+- Event checks use Node's own IP parser, so `::1` is caught and `12:34:56:78` is not. `SK-2024` no longer reads as a key, and tokens joined to a prefix are caught.
+
 ## 0.1.1 — 2026-11-05 — helper fixes from the Kilo Marketplace review
 
 - `test-form-flow` now blocks WebSockets, which it used to let through while reporting a pass, and needs Playwright 1.48 or later.

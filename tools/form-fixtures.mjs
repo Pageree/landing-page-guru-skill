@@ -14,8 +14,8 @@ form.addEventListener('submit', async event => {
   } catch { status.textContent = 'Please try again'; }
 });`;
 
-const shell = (attributes, extra) => `<!doctype html><meta charset="utf-8"><title>Form fixture</title>
-<form id="lead-form" ${attributes}><label>Email <input name="email" type="email" required></label><button type="submit">Send</button></form>
+const shell = (attributes, extra, fields = '') => `<!doctype html><meta charset="utf-8"><title>Form fixture</title>
+<form id="lead-form" ${attributes}><label>Email <input name="email" type="email" required></label>${fields}<button type="submit">Send</button></form>
 <p id="form-status" role="status"></p>${extra}`;
 
 // Synthetic pages for what the examples cannot show: other traffic around the form.
@@ -29,9 +29,14 @@ export async function startFormFixtures() {
     '/analytics/': shell('', `<script>${handler('/submit')}</script><script>navigator.sendBeacon('/collect', 'view')</script>`),
     '/form-copy/': shell('', `<script>${handler('/submit')}
 form.addEventListener('submit', () => navigator.sendBeacon('/undeclared', form.email.value));</script>`),
+    '/form-copy-encoded/': shell('', `<script>${handler('/submit')}
+form.addEventListener('submit', () => navigator.sendBeacon('/undeclared', new URLSearchParams({ company: form.company.value })));</script>`, '<label>Company <input name="company"></label>'),
     '/websocket/': shell('', `<script>${handler('/submit')}
 form.addEventListener('submit', () => { const socket = new WebSocket('ws://127.0.0.1:${main.address().port}/live'); socket.onopen = () => socket.send(form.email.value); });</script>`),
     '/native/': shell('method="post" action="/submit"', ''),
+    '/no-validation/': shell('method="post" action="/submit" novalidate', ''),
+    '/iframe-post/': shell('method="post" action="/submit" target="sink"', '<iframe name="sink" hidden></iframe>'),
+    '/new-tab/': shell('method="post" action="/submit" target="_blank"', ''),
     '/cdn-script/': shell('', `<script src="${origin(other)}/form.js"></script>`)
   });
   const respond = (request, response) => {
@@ -61,6 +66,10 @@ form.addEventListener('submit', () => { const socket = new WebSocket('ws://127.0
       contract.verification.target = `${origin(main)}${path}`;
       contract.verification.browser.values = { email: 'visitor@example.test' };
       contract.verification.browser.timeoutMs = 1500;
+      if (path === '/form-copy-encoded/') {
+        contract.form.fields.push({ ...contract.form.fields[0], name: 'company', type: 'text', required: false });
+        contract.verification.browser.values.company = 'Acme Test Company';
+      }
       return contract;
     },
     async close() {

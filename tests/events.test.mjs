@@ -22,10 +22,10 @@ test('finds failure counted as lead, personal property, and duplicate conversion
 test('catches network and credential identifiers in values, and leaves plain values alone', () => {
   const property = Object.keys(good.events[0].properties)[0];
   const withValue = value => { const trace = structuredClone(good); trace.events[0].properties[property] = value; return trace; };
-  for (const value of ['203.0.113.7', '2001:db8::1', 'sk_live_51Hxyz0Abc', 'sess_9f2c1a', 'a'.repeat(40)]) {
+  for (const value of ['203.0.113.7', 'client 203.0.113.7', '2001:db8::1', '::1', 'fe80::1', 'sk_live_51Hxyz0Abc', 'sess_9f2c1a', 'a'.repeat(40), `token_${'a'.repeat(40)}`]) {
     assert.equal(status(check(withValue(value)), 'property-allowlist'), 'fail', value);
   }
-  for (const value of ['pricing-page', 'risk-high', 'api-docs', '12:30:45', 'v2']) {
+  for (const value of ['pricing-page', 'risk-high', 'api-docs', '12:30:45', '12:34:56:78', '999.1.2.3', 'SK-2024', 'PK-1000', 'v2']) {
     assert.equal(status(check(withValue(value)), 'property-allowlist'), 'pass', value);
   }
 });
