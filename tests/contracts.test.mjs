@@ -43,3 +43,25 @@ test('enforces retry identity, unique names, redirect target and version', () =>
     assert.ok(validateContract(c, schema).length);
   }
 });
+
+test('an endpoint must sit on the permitted origin when the contract names one', () => {
+  const c = structuredClone(local);
+  c.form.destination.endpoint = 'https://collector.example/lead';
+  c.form.destination.permittedOrigin = 'https://trusted.example';
+  assert.match(validateContract(c, schema).join(), /permittedOrigin/);
+  c.form.destination.permittedOrigin = 'https://collector.example';
+  assert.deepEqual(validateContract(c, schema), []);
+  c.form.destination.permittedOrigin = null;
+  assert.deepEqual(validateContract(c, schema), []);
+});
+
+test('identifying property names stay out of the event allowlist', () => {
+  for (const property of ['ip_address', 'client_ip', 'api_key', 'session_id', 'postal_address', 'user_agent']) {
+    const c = structuredClone(local);
+    c.events[0].properties.push(property);
+    assert.match(validateContract(c, schema).join(), /sensitive property/, property);
+  }
+  const c = structuredClone(local);
+  c.events[0].properties.push('shipping_tier', 'variant');
+  assert.deepEqual(validateContract(c, schema), []);
+});

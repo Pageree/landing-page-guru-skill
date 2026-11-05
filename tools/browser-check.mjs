@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { startFormFixtures } from './form-fixtures.mjs';
 import { startPreview } from './serve.mjs';
 import { finishReport, loadBrowser, loadContract } from '../skills/landing-page-guru-skill/scripts/lib/common.mjs';
 import { testFormFlow } from '../skills/landing-page-guru-skill/scripts/test-form-flow.mjs';
@@ -13,6 +14,7 @@ await mkdir(output, { recursive: true });
 const { chromium } = await loadBrowser(process.env.GURU_PLAYWRIGHT_MODULE);
 const browser = await chromium.launch({ headless: true, executablePath: process.env.GURU_CHROMIUM_EXECUTABLE });
 const preview = await startPreview();
+const fixtures = await startFormFixtures();
 const results = [];
 try {
   for (const slug of ['waitlist', 'local-service', 'b2b-demo', 'lead-magnet']) {
@@ -76,6 +78,25 @@ try {
     assert.equal(await page.evaluate(() => window.__landingEvents.length), 0, 'Reload does not manufacture a lead');
     await page.close();
   }
+  const base = await loadContract(resolve(root, 'examples/b2b-demo/integration-contract.json'));
+  const flowOn = async path => {
+    const flow = finishReport(await testFormFlow(fixtures.contract(base, path), { url: fixtures.url(path), browser }));
+    await writeFile(resolve(output, `fixture-${path.slice(1, -1)}.json`), JSON.stringify(flow, null, 2));
+    return flow;
+  };
+  for (const path of ['/same-origin/', '/cross-origin/', '/analytics/', '/websocket/']) {
+    const flow = await flowOn(path);
+    assert.equal(flow.summary.fail, 0, `${path} form states`);
+    assert.equal(flow.summary.pass, 6, `${path} six browser scenarios ran`);
+  }
+  assert.deepEqual(fixtures.seen, { posts: 0, sockets: 0 }, 'Nothing reached a live endpoint');
+  const copied = await flowOn('/form-copy/');
+  assert.ok(copied.summary.fail > 0, 'Form values sent to an undeclared URL fail the flow');
+  const native = await flowOn('/native/');
+  assert.equal(native.summary.fail, 0, 'A navigating form is out of scope, not broken');
+  assert.equal(native.checks.find(check => check.id === 'accepted').status, 'not-tested');
+  const cdn = await flowOn('/cdn-script/');
+  assert.match(cdn.checks.find(check => check.id === 'accepted').observation, /[1-9]\d* cross-origin reads blocked/);
   await writeFile(resolve(output, 'summary.json'), JSON.stringify({ date: new Date().toISOString(), browser: browser.version(), results, limitations: ['No live backend or email delivery tested', 'Structural checks are not a full accessibility audit', 'Browser event traces cover acceptance and reload; broader semantics use separate fixtures'] }, null, 2));
-  console.log(`Browser checks passed: ${results.length} responsive views, 18 intercepted form scenarios, 3 local acceptances/events, unconnected waitlist, download and reload checks.`);
-} finally { await browser.close(); await preview.close(); }
+  console.log(`Browser checks passed: ${results.length} responsive views, 18 intercepted form scenarios, 3 local acceptances/events, unconnected waitlist, download and reload checks, 7 helper fixtures.`);
+} finally { await browser.close(); await preview.close(); await fixtures.close(); }

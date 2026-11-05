@@ -44,7 +44,7 @@ node skills/landing-page-guru-skill/scripts/test-form-flow.mjs \
   --output artifacts/form-report.json
 ```
 
-Use an existing Playwright installation in the invoking project. If it is elsewhere,
+Use an existing Playwright 1.48+ installation in the invoking project. If it is elsewhere,
 pass `--browser-module /absolute/path/to/playwright/index.mjs` or set
 `GURU_PLAYWRIGHT_MODULE`. A compatible Chromium binary must already be installed.
 `GURU_CHROMIUM_EXECUTABLE` can select an existing binary; record its version and
@@ -58,11 +58,15 @@ verifies the resource download. Screenshots/reports go to `artifacts/browser/`.
 The installed form helper runs independent browser contexts for empty required
 fields, acceptance, rejection, duplicate response, transport timeout, and retry.
 It checks visible live-region feedback, input preservation after failure, button
-recovery, request counts, and idempotency-header stability where supported.
+recovery, request counts, and idempotency-header stability where supported. It
+covers forms handled by page script; a form that navigates on submit reports
+`not-tested`.
 
-All configured form requests receive synthetic responses. Other mutations and
-off-origin requests are blocked. `--allow-remote` allows reading the specified
-remote page, not sending real leads. Backend acceptance, storage, notification,
+All configured form requests receive synthetic responses. Other mutations,
+off-origin requests and WebSockets are blocked, so test a self-contained build. A
+blocked mutation fails a check only when it targets the destination or carries form
+values, so analytics posts do not fail the flow. WebRTC is not intercepted.
+`--allow-remote` allows reading the specified remote page, not sending real leads. Backend acceptance, storage, notification,
 and recipient receipt remain `not-tested`; a successful form run therefore normally
 exits 2. It also does not establish slow-response behavior, complete keyboard or
 screen-reader accessibility, abuse protection, server validation, or consent behavior.

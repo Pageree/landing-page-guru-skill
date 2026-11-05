@@ -11,7 +11,7 @@ Recorded 2026-09-23.
   for a tiny edit. Preserve the user's stack and existing conventions.
 - No custom installer or runtime npm dependencies. Standard skills CLI provides
   interactive installation. Browser tooling is optional and externally supplied.
-- Helpers cover one POST form and a versioned trace contract. They prefer explicit
+- Helpers cover one POST form handled by page script and a versioned trace contract. They prefer explicit
   unsupported checks over a universal “conversion readiness” score.
 - Example forms use an isolated local simulator. Assets and fictional interfaces
   are original; they are labeled and contain no manufactured customer proof.
