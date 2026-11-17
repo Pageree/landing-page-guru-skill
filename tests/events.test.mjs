@@ -25,7 +25,11 @@ test('catches network and credential identifiers in values, and leaves plain val
   for (const value of ['203.0.113.7', 'client 203.0.113.7', '2001:db8::1', '::1', 'fe80::1', 'sk_live_51Hxyz0Abc', 'sess_9f2c1a', 'a'.repeat(40), `token_${'a'.repeat(40)}`]) {
     assert.equal(status(check(withValue(value)), 'property-allowlist'), 'fail', value);
   }
-  for (const value of ['pricing-page', 'risk-high', 'api-docs', '12:30:45', '12:34:56:78', '999.1.2.3', 'SK-2024', 'PK-1000', 'v2']) {
+  // An address keeps counting when punctuation, a port, a zone or a prefix touches it.
+  for (const value of ['10.0.0.1:8080', '(10.0.0.1)', '10.0.0.1.', 'from 10.0.0.1.', 'ip:203.0.113.7', '10.0.0.0/8', '[2001:db8::1]:8080', '[::1]', 'fe80::1%eth0', '::ffff:10.0.0.1']) {
+    assert.equal(status(check(withValue(value)), 'property-allowlist'), 'fail', value);
+  }
+  for (const value of ['pricing-page', 'risk-high', 'api-docs', '12:30:45', '12:34:56:78', '999.1.2.3', '1.2.3.4.5', 'v1.2.3', '3.14', 'cafe', 'SK-2024', 'PK-1000', 'v2']) {
     assert.equal(status(check(withValue(value)), 'property-allowlist'), 'pass', value);
   }
 });

@@ -4,7 +4,7 @@ description: Build, audit, or improve landing pages with clear offers, persuasiv
 license: MIT
 metadata:
   author: Pageree
-  version: "0.1.2"
+  version: "0.1.3"
 ---
 
 # Landing Page Guru Skill

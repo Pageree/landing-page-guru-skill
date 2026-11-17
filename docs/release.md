@@ -1,6 +1,6 @@
 # Release checklist and verification record
 
-Version: 0.1.2 source preview. Updated: 2026-11-05.
+Version: 0.1.3 source preview. Updated: 2026-11-17.
 
 ## Before publication
 
@@ -28,6 +28,10 @@ for the initial publication on 2026-09-24. No dependencies were installed into o
 For 0.1.2 on 2026-11-05, project checks, deterministic tests and browser checks reran on
 macOS with Node 25.8.2, Playwright 1.62.1 and Chrome 157.0.8103.38. The other rows
 are from 0.1.0.
+
+For 0.1.3 on 2026-11-17, which changes only the event validator, project checks and
+deterministic tests reran on macOS with Node 25.8.2. Browser checks did not rerun
+(no Playwright on the host); their row is from 0.1.2.
 
 | Area | Result / limit |
 | --- | --- |

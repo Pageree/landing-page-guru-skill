@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3 — 2026-11-17 — IP detection from the third Kilo review
+
+- Event checks find an IP address inside surrounding punctuation again: `10.0.0.1:8080`, `(10.0.0.1)`, `10.0.0.1.`, `[::1]:8080` and `fe80::1%eth0` now fail `property-allowlist`. 0.1.2 only recognized an address standing alone between spaces, commas, semicolons or `=`. `12:34:56:78`, `999.1.2.3` and `1.2.3.4.5` still pass.
+
 ## 0.1.2 — 2026-11-05 — second round of helper fixes
 
 - `test-form-flow` fails a form that posts on an empty submit again; 0.1.1 had reported it as `not-tested`.
