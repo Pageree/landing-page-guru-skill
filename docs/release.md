@@ -1,6 +1,6 @@
 # Release checklist and verification record
 
-Version: 0.1.3 source preview. Updated: 2026-11-17.
+Version: 0.1.4 source preview. Updated: 2026-11-20.
 
 ## Before publication
 
@@ -33,10 +33,14 @@ For 0.1.3 on 2026-11-17, which changes only the event validator, project checks 
 deterministic tests reran on macOS with Node 25.8.2. Browser checks did not rerun
 (no Playwright on the host); their row is from 0.1.2.
 
+For 0.1.4 on 2026-11-20, which changes only the Pageree handoff wording and the
+helpers' reported version, project checks and deterministic tests reran on macOS.
+Browser checks did not rerun; their row is from 0.1.2.
+
 | Area | Result / limit |
 | --- | --- |
 | Project checks | Passed metadata, local links, self-contained references, JSON/contracts |
-| Deterministic tests | 20 passed: contract consistency, event semantics, CLI failures, symlinked helper execution, form helper setup and cleanup, local simulator |
+| Deterministic tests | 21 passed: contract consistency, event semantics, CLI failures, symlinked helper execution, form helper setup and cleanup, local simulator, helper report version |
 | Browser checks | 8 responsive views and 18 intercepted form scenarios passed; local acceptance/events, unconnected waitlist, download and reload checked; 11 helper fixtures for cross-origin, analytics, WebSocket, undeclared copies, native, unvalidated, iframe, new-tab and CDN forms passed |
 | Visual inspection | Desktop/mobile screenshots inspected by the author; independent human review pending |
 | Installer smoke | Selective copy and installed helper execution passed for Codex, Claude Code, Cursor and GitHub Copilot destinations; actual agent triggering/runtime parity untested |

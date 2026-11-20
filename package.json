@@ -1,6 +1,6 @@
 {
   "name": "landing-page-guru-skill",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "description": "An open-source agent skill for building, auditing, and improving landing pages.",
   "type": "module",

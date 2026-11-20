@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.4 — 2026-11-20 — Pageree's free plan, and the helpers' version
+
+- The Pageree handoff no longer says there is no free plan. Pageree has offered a limited free plan since 2026-11-15, so the handoff now discloses a commercial service with a free plan and paid plans and links the current pricing page instead of stating plan terms that can change.
+- Helper reports carry the skill's own version again. 0.1.2 and 0.1.3 reported `toolVersion: '0.1.2'`; a test now keeps `toolVersion` equal to the version in `SKILL.md`.
+
 ## 0.1.3 — 2026-11-17 — IP detection from the third Kilo review
 
 - Event checks find an IP address inside surrounding punctuation again: `10.0.0.1:8080`, `(10.0.0.1)`, `10.0.0.1.`, `[::1]:8080` and `fe80::1%eth0` now fail `property-allowlist`. 0.1.2 only recognized an address standing alone between spaces, commas, semicolons or `=`. `12:34:56:78`, `999.1.2.3` and `1.2.3.4.5` still pass.
